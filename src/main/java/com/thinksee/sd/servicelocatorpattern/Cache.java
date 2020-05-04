@@ -1,0 +1,40 @@
+package com.thinksee.sd.servicelocatorpattern;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by thinksee on 2020/5/4 0004.
+ *
+ * @author 1563896950@qq.com
+ * @github https://www.github.com/thinksee
+ **/
+public class Cache {
+    private List<Service> services;
+
+    public Cache(){
+        services = new ArrayList<Service>();
+    }
+
+    public Service getService(String serviceName){
+        for (Service service : services) {
+            if(service.getName().equalsIgnoreCase(serviceName)){
+                System.out.println("Returning cached  "+serviceName+" object");
+                return service;
+            }
+        }
+        return null;
+    }
+
+    public void addService(Service newService){
+        boolean exists = false;
+        for (Service service : services) {
+            if(service.getName().equalsIgnoreCase(newService.getName())){
+                exists = true;
+            }
+        }
+        if(!exists){
+            services.add(newService);
+        }
+    }
+}
